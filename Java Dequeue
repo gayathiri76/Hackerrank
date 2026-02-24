@@ -1,0 +1,36 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        
+        Deque<Integer> deque = new ArrayDeque<>();
+        HashSet<Integer> set = new HashSet<>();
+        
+        int maxUnique = 0;
+       st = new StringTokenizer(br.readLine());
+        
+        for (int i = 0; i < n; i++) {
+            int num = Integer.parseInt(st.nextToken());
+            deque.addLast(num);
+            set.add(num);
+            if (deque.size() == m) {
+                if (set.size() > maxUnique) {
+                    maxUnique = set.size();
+                }
+                if (maxUnique == m) break;
+                int first = deque.removeFirst();
+                if (!deque.contains(first)) {
+                    set.remove(first);
+                }
+            }
+        }
+        
+        System.out.println(maxUnique);
+    }
+}
