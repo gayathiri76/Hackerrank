@@ -1,0 +1,33 @@
+import java.util.*;
+import java.security.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNext()) return;
+        String s = sc.next();
+        sc.close();
+        
+        try {
+            // Initialize MessageDigest with MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            
+            // Calculate the digest (hash)
+            byte[] digest = md.digest(s.getBytes());
+            
+            // Convert byte array to hexadecimal string
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                // %02x ensures a 2-digit hex with leading zeros
+                hexString.append(String.format("%02x", b));
+            }
+            
+            System.out.println(hexString.toString());
+            
+        } catch (NoSuchAlgorithmException e) {
+            // MD5 is a standard algorithm, so this is unlikely
+            e.printStackTrace();
+        }
+    }
+}
